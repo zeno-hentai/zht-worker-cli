@@ -1,0 +1,24 @@
+{
+  "name": "zht-worker-cli",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/zeno-hentai/zht-worker-cli",
+  "author": "Jaccob Kii",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@types/chai": "^4.2.5",
+    "@types/inquirer": "^6.5.0",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "inquirer": "^7.0.0",
+    "mocha": "^6.2.2",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2",
+    "zht-client-api": "^0.0.8"
+  }
+}
