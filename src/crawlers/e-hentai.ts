@@ -11,17 +11,23 @@ async function test(url: string): Promise<boolean> {
     return !!url.match(/http?s:\/\/e-hentai\.org\/g\/\d+\/[A-Za-z]+\d+\//)
 }
 
-function parseMetaPage(doc: CheerioStatic): [Exclude<GalleryMeta, 'pageNumber' | 'files'>, string[], string] {
+function parseMetaPage(doc: CheerioStatic): [Omit<GalleryMeta, 'pageNumber' | 'files'>, string[], string] {
     const title = doc("#gn").text()
     const jpTitle = doc("#gj").text()
+    const description = ""
+    const language = 'jp'
+    const tags: string[]
     return [
         {
+            type: "gallery",
             title,
             subTitles: {
                 'jp': jpTitle
-            }
+            },
+            description,
+            language
         },
-        [],
+        tags,
         ""
     ]
 }
