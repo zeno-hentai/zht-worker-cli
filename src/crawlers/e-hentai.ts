@@ -13,9 +13,10 @@ async function test(url: string): Promise<boolean> {
 
 async function download(url: string, proxy: CrawlerProxyConfig | null, client: CrawlerMetaClient<GalleryMeta>): Promise<boolean> {
     const agent = axios.create({
-        proxy
+        proxy: proxy || undefined
     });
-    cheerio.parseHTML((await agent.get(url)).data)
+    const doc = cheerio.load((await agent.get(url)).data)
+    doc(".")
 }
 
 export const EHentaiCrawler: ZHTCrawler<GalleryMeta> = {

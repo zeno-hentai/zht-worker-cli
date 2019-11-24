@@ -1,11 +1,9 @@
 import { RuntimeConfig } from '../../dist/data/config';
 import { ZHTWebSocketClient } from '../../../zht-client-api/dist/lib/utils/net/ws';
 import { createWebSocketFromConfig } from './es';
-import ZHTWorkerClientAPI from '../../../zht-client-api/lib/ZHTWorkerClientAPI/index';
 import { pollTask } from './crawler';
 export class ZHTCrawlerManager {
     private ws: ZHTWebSocketClient
-    private client: ZHTWorkerClientAPI
     private config: RuntimeConfig
     private flow: Promise<void>
     constructor(config: RuntimeConfig){

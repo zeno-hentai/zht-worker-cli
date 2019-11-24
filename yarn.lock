@@ -2488,10 +2488,10 @@ yn@^3.0.0:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-zht-client-api@0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/zht-client-api/-/zht-client-api-0.0.11.tgz#be14f207d4d14e5f4910ba3752f757d2e7578878"
-  integrity sha512-HxdXluyvtIQyEypA3ocJby8qclQCGC8ss/2CZF/KnbhuIC+bTTq2tR8ppqidlCNeHglXD6k4/yi/gN4MZNuCUg==
+zht-client-api@0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/zht-client-api/-/zht-client-api-0.0.13.tgz#f2703b0173ed49f5042aa1ab7f84854010cd1435"
+  integrity sha512-WIRKdHte/6d15VgVfUmL+/ae2FLn/wzLZUSt+SihYgHrpO8kTDE0rp735pEn6RqFyO0n4VQeQm8OoPYb7T3I1A==
   dependencies:
     "@peculiar/webcrypto" "^1.0.21"
     "@types/axios" "^0.14.0"

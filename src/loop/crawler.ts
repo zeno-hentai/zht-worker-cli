@@ -6,7 +6,7 @@ import { ConfigFileData } from '../../dist/data/config';
 
 export async function getMatchedCrawler(url: string): Promise<ZHTCrawler<ZHTBaseMeta<any>> | null>{
     const matched = await Promise.all(crawlerList.map(async crawler => (await crawler.test(url)) ? crawler : null))
-    return matched.find( t => !!t )
+    return matched.find( t => !!t ) || null
 }
 
 export async function initializeCrawlers(proxy: CrawlerProxyConfig | null): Promise<void> {
