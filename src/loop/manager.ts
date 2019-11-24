@@ -1,0 +1,36 @@
+import { RuntimeConfig } from '../../dist/data/config';
+import { ZHTWebSocketClient } from '../../../zht-client-api/dist/lib/utils/net/ws';
+import { createWebSocketFromConfig } from './es';
+import ZHTWorkerClientAPI from '../../../zht-client-api/lib/ZHTWorkerClientAPI/index';
+import { pollTask } from './crawler';
+export class ZHTCrawlerManager {
+    private ws: ZHTWebSocketClient
+    private client: ZHTWorkerClientAPI
+    private config: RuntimeConfig
+    private flow: Promise<void>
+    constructor(config: RuntimeConfig){
+        this.config = config
+        this.flow = Promise.resolve()
+        this.ws = createWebSocketFromConfig(config.config.server)
+        this.ws.onMessage(() => {
+            this.poll()
+        })
+        this.ws.send(config.config.server.apiToken)
+        this.poll()
+    }
+
+    private poll() {
+        this.flow = this.flow.then(async () => {
+            const proxy = this.config.config.server.useProxy ? {
+                host: this.config.config.server.proxyHost,
+                port: this.config.config.server.proxyPort
+            } : null
+            await pollTask(proxy, this.config.client, this.config.config)
+        })
+    }
+
+    async close(){
+        this.ws.close()
+        await this.flow
+    }
+}

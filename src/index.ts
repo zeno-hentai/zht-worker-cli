@@ -1,7 +1,7 @@
-import { questionServerInfo } from './intro/questions'
+import { introProject } from './intro'
 
 async function main(){
-    const serverInfo = await questionServerInfo()
+    const serverInfo = await introProject()
     console.log(serverInfo)
 }
 
