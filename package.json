@@ -9,7 +9,8 @@
     "build": "yarn clean; tsc",
     "clean": "rm -rf ./dist",
     "start": "ts-node src/index.ts",
-    "test": "mocha -r ts-node/register tests/**/*.test.ts"
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "build-package": "rm zht-worker-cli.tgz; tar -zcvf zht-worker-cli.tgz ./zht-worker-cli ./node_modules ./dist"
   },
   "files": [
     "dist"
