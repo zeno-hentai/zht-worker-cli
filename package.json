@@ -6,7 +6,7 @@
   "author": "Jaccob Kii",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "yarn clean; tsc",
     "clean": "rm -rf ./dist",
     "start": "ts-node src/index.ts",
     "test": "mocha -r ts-node/register tests/**/*.test.ts"

@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { createWorkTestConfig } from '../utils';
 import { ZHTCrawlerManager } from '../../src/loop/manager';
 import { WorkerTestConfig } from '../utils/config';
-import { GalleryMeta } from '../../../zht-client-api/dist/lib/meta/gallery';
+import { GalleryMeta } from 'zht-client-api';
 describe('e-hentai crawler test', () => {
     const crawler = EHentaiCrawler
     const url = 'https://e-hentai.org/g/1522800/cde4635627/'

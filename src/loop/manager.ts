@@ -1,7 +1,7 @@
 import { RuntimeConfig } from '../data/config';
 import { createWebSocketFromConfig } from './es';
 import { pollTask } from './crawler';
-import { ZHTWorkerNotificationListener } from '../../../zht-client-api/dist/lib/data/worker';
+import { ZHTWorkerNotificationListener } from 'zht-client-api';
 export class ZHTCrawlerManager {
     private listener?: ZHTWorkerNotificationListener
     private config: RuntimeConfig
