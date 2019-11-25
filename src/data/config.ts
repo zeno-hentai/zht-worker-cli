@@ -1,5 +1,4 @@
-import { ZHTWorkerClientAPI } from "zht-client-api";
-import { ZHTKeyPair } from '../../../zht-client-api';
+import { ZHTWorkerClientAPI, ZHTKeyPair } from "zht-client-api";
 
 export interface BasicServerInfoMain {
     https: boolean

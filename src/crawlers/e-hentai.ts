@@ -2,7 +2,7 @@ import { ZHTCrawler, CrawlerMetaClient, CrawlerProxyConfig } from '../types/craw
 import { GalleryMeta } from 'zht-client-api';
 import cheerio from 'cheerio'
 import axios from 'axios';
-import { ZHTLanguage } from '../../../zht-client-api/lib/meta/base';
+import { ZHTLanguage } from 'zht-client-api';
 
 async function initialize(proxy: CrawlerProxyConfig | null): Promise<void>{
 
