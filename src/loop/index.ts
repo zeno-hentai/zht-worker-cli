@@ -2,7 +2,7 @@ import { RuntimeConfig } from '../data/config';
 import { ZHTCrawlerManager } from './manager';
 export * from './manager'
 export * from './crawler'
-export function initializeLoop(config: RuntimeConfig, onClose: () => void): ZHTCrawlerManager{
+export async function initializeLoop(config: RuntimeConfig, onClose: () => void): Promise<ZHTCrawlerManager>{
     let forceExit = false
     const manager = new ZHTCrawlerManager(config)
     process.on('SIGINT', function() {
@@ -20,6 +20,7 @@ export function initializeLoop(config: RuntimeConfig, onClose: () => void): ZHTC
             })
         }
     })
+    await manager.initialize()
     console.log("Worker launched, press Ctrl+C to exit.")
     return manager
 }

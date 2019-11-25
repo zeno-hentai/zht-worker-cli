@@ -1,19 +1,26 @@
 import { RuntimeConfig } from '../data/config';
 import { createWebSocketFromConfig } from './es';
 import { pollTask } from './crawler';
-import { ZHTWebSocketClient } from 'zht-client-api';
+import { ZHTWorkerNotificationListener } from '../../../zht-client-api/dist/lib/data/worker';
 export class ZHTCrawlerManager {
-    private ws: ZHTWebSocketClient
+    private listener?: ZHTWorkerNotificationListener
     private config: RuntimeConfig
     private flow: Promise<void>
+    private pollHandlers: ((success: boolean) => void)[]
     constructor(config: RuntimeConfig){
         this.config = config
         this.flow = Promise.resolve()
-        this.ws = createWebSocketFromConfig(config.config.server)
-        this.ws.onMessage(() => {
-            this.poll()
+        this.pollHandlers = []
+    }
+
+    async initialize() {
+        this.listener = await this.config.client.connectWorker({
+            userPublicKey: this.config.config.worker.userPublicKey,
+            workerPublicKey: this.config.keyPair.publicKey,
+            onNotification: () => {
+                this.poll()
+            }
         })
-        this.ws.send(config.config.server.apiToken)
         this.poll()
     }
 
@@ -23,12 +30,24 @@ export class ZHTCrawlerManager {
                 host: this.config.config.server.proxyHost,
                 port: this.config.config.server.proxyPort
             } : null
-            await pollTask(proxy, this.config.client, this.config.config, this.config.keyPair.privateKey)
+            const status = await pollTask(proxy, this.config.client, this.config.config, this.config.keyPair.privateKey)
+            if(status == 'SUCCESS' || status == 'FAILED'){
+                const success = status == 'SUCCESS'
+                for(let h of this.pollHandlers){
+                    h(success)
+                }
+            }
         })
     }
 
+    onPoll(handler: (success: boolean) => void){
+        this.pollHandlers.push(handler)
+    }
+
     async close(){
-        this.ws.close()
+        if(this.listener){
+            this.listener.close()
+        }
         await this.flow
     }
 }

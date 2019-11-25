@@ -18,3 +18,5 @@ export interface CrawlerProxyConfig {
     host: string
     port: number
 }
+
+export type CrawlerStatus = 'EMPTY' | 'SUCCESS' | 'FAILED' | 'NOT_MATCHED'
