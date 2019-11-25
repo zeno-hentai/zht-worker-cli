@@ -1,8 +1,7 @@
 language: node
 node_js: 10
 before_script: yarn install
-script: yarn build
-after_script: yarn build-package
+script: yarn build && yarn build-package
 cache:
   directories:
   - "node_modules"
