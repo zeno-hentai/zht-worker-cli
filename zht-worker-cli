@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+node ./dist/zht-worker-cli/src/index.js
