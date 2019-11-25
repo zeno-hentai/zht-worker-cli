@@ -2,7 +2,7 @@ import { ZHTWorkerClientAPI } from 'zht-client-api';
 import { RuntimeConfig, GeneratedServerInfo } from '../data/config';
 import { questionServerInfo } from './questions';
 import { getBaseUrl } from './utils';
-export async function launchGuide(): Promise<RuntimeConfig>{
+export async function launchGuide(): Promise<Pick<RuntimeConfig, 'config' | 'client'>>{
     console.log("Creating config file...")
     const server = await questionServerInfo()
     const client = new ZHTWorkerClientAPI({
@@ -11,9 +11,9 @@ export async function launchGuide(): Promise<RuntimeConfig>{
         proxy: null
     })
     const userPublicKey = await client.getPublicKey()
-    const {privateKey: workerPrivateKey} = await client.registerWorker(userPublicKey)
+    await client.registerWorker()
     const worker: GeneratedServerInfo = {
-        userPublicKey, workerPrivateKey
+        userPublicKey
     }
     return {
         config: {

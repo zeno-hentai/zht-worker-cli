@@ -1,4 +1,5 @@
-import { ZHTBaseMeta } from '../../../zht-client-api/dist/lib/meta/base';
+import { ZHTBaseMeta } from "zht-client-api";
+
 export interface ZHTCrawler<Meta extends ZHTBaseMeta<any>> {
     initialize(proxy: CrawlerProxyConfig | null): Promise<void>
     test(url: string): Promise<boolean>

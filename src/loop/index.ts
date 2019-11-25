@@ -1,8 +1,8 @@
-import { RuntimeConfig } from '../../dist/data/config';
+import { RuntimeConfig } from '../data/config';
 import { ZHTCrawlerManager } from './manager';
 export * from './manager'
 export * from './crawler'
-export function initializeLoop(config: RuntimeConfig): ZHTCrawlerManager{
+export function initializeLoop(config: RuntimeConfig, onClose: () => void): ZHTCrawlerManager{
     let forceExit = false
     const manager = new ZHTCrawlerManager(config)
     process.on('SIGINT', function() {
@@ -10,11 +10,13 @@ export function initializeLoop(config: RuntimeConfig): ZHTCrawlerManager{
         if(forceExit){
             console.log("Forced exited.")
             process.exit(-1)
+            onClose()
         }else{
             console.log("Quitting, press Ctrl+C again to force exit.")
             forceExit = true
             manager.close().then(() => {
                 process.exit()
+                onClose()
             })
         }
     })

@@ -1,5 +1,5 @@
-import { ConfigFileData } from '../../dist/data/config';
 import fs from 'fs';
+import { ConfigFileData } from '../../src/data';
 
 export interface CreateConfigFileOptions {
     apiToken: string
@@ -7,7 +7,7 @@ export interface CreateConfigFileOptions {
     userPublicKey: string
     configFile: string
 }
-export async function createConfigFile({apiToken, workerPrivateKey, userPublicKey, configFile}: CreateConfigFileOptions) {
+export async function createConfigFile({apiToken, userPublicKey, configFile}: CreateConfigFileOptions) {
     const data: ConfigFileData = {
         server: {
             host: 'localhost',
@@ -17,7 +17,6 @@ export async function createConfigFile({apiToken, workerPrivateKey, userPublicKe
             useProxy: false
         },
         worker: {
-            workerPrivateKey,
             userPublicKey
         }
     }

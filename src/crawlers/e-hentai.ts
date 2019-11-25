@@ -16,7 +16,7 @@ function parseMetaPage(doc: CheerioStatic): [Omit<GalleryMeta, 'pageNumber' | 'f
     const jpTitle = doc("#gj").text()
     const description = ""
     const language = 'jp'
-    const tags: string[]
+    const tags: string[] = []
     return [
         {
             type: "gallery",
@@ -33,7 +33,7 @@ function parseMetaPage(doc: CheerioStatic): [Omit<GalleryMeta, 'pageNumber' | 'f
 }
 
 function parseImagePage(doc: CheerioStatic): [string, string | null] {
-
+    return ["", null]
 }
 
 async function download(url: string, proxy: CrawlerProxyConfig | null, client: CrawlerMetaClient<GalleryMeta>): Promise<boolean> {
@@ -47,7 +47,7 @@ async function download(url: string, proxy: CrawlerProxyConfig | null, client: C
     while(pageUrl != null){
         const imgDoc = cheerio.load((await agent.get(pageUrl)).data)
         const [imgUrl, nextPage] = parseImagePage(imgDoc)
-        const ext = imgUrl.match(/\.(\w+)$/)[1]
+        const ext = (imgUrl.match(/\.(\w+)$/) || ['jpg'])[1]
         const {data} = (await agent.get(imgUrl))
         images.push([ext, data])
         pageUrl = nextPage

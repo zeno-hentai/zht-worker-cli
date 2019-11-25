@@ -1,4 +1,5 @@
 import { ZHTWorkerClientAPI } from "zht-client-api";
+import { ZHTKeyPair } from '../../../zht-client-api';
 
 export interface BasicServerInfoMain {
     https: boolean
@@ -14,7 +15,6 @@ export type BasicServerInfo = Exclude<BasicServerInfoMain, 'useProxy'> & (
 )
 
 export interface GeneratedServerInfo {
-    workerPrivateKey: string
     userPublicKey: string
 }
 
@@ -25,5 +25,6 @@ export interface ConfigFileData {
 
 export interface RuntimeConfig {
     config: ConfigFileData
+    keyPair: ZHTKeyPair
     client: ZHTWorkerClientAPI
 }

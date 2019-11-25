@@ -1,7 +1,7 @@
-import { RuntimeConfig } from '../../dist/data/config';
-import { ZHTWebSocketClient } from '../../../zht-client-api/dist/lib/utils/net/ws';
+import { RuntimeConfig } from '../data/config';
 import { createWebSocketFromConfig } from './es';
 import { pollTask } from './crawler';
+import { ZHTWebSocketClient } from 'zht-client-api';
 export class ZHTCrawlerManager {
     private ws: ZHTWebSocketClient
     private config: RuntimeConfig
@@ -23,7 +23,7 @@ export class ZHTCrawlerManager {
                 host: this.config.config.server.proxyHost,
                 port: this.config.config.server.proxyPort
             } : null
-            await pollTask(proxy, this.config.client, this.config.config)
+            await pollTask(proxy, this.config.client, this.config.config, this.config.keyPair.privateKey)
         })
     }
 

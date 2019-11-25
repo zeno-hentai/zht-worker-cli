@@ -1,6 +1,5 @@
 import { EHentaiCrawler } from '../../src/crawlers/e-hentai';
 import { expect } from 'chai';
-import ZHTClientAPI from '../../../zht-client-api/dist/lib/ZHTClientAPI/index';
 describe('e-hentai crawler test', async () => {
     const crawler = EHentaiCrawler
     const url = 'https://e-hentai.org/g/1522800/cde4635627/'

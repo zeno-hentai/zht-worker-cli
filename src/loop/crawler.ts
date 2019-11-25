@@ -1,8 +1,8 @@
 import crawlerList from '../crawlers';
 import { ZHTCrawler, CrawlerProxyConfig, CrawlerMetaClient } from '../types/crawlers';
-import { ZHTBaseMeta } from '../../../zht-client-api/dist/lib/meta/base';
 import { ZHTWorkerClientAPI } from "zht-client-api";
-import { ConfigFileData } from '../../dist/data/config';
+import { ZHTBaseMeta } from 'zht-client-api';
+import { ConfigFileData } from '../data/config';
 
 export async function getMatchedCrawler(url: string): Promise<ZHTCrawler<ZHTBaseMeta<any>> | null>{
     const matched = await Promise.all(crawlerList.map(async crawler => (await crawler.test(url)) ? crawler : null))
@@ -45,9 +45,10 @@ export async function executeCrawler(
 export async function pollTask(
     proxy: CrawlerProxyConfig | null,
     workerClient: ZHTWorkerClientAPI,
-    config: ConfigFileData
+    config: ConfigFileData,
+    workerPrivateKey: string
 ): Promise<boolean> {
-    const polledTask = await workerClient.pollTask(config.worker.workerPrivateKey)
+    const polledTask = await workerClient.pollTask(workerPrivateKey)
     if(polledTask.hasTask){
         const {id, url} = polledTask.data
         const crawler = await getMatchedCrawler(url)
