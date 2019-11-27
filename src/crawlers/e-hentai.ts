@@ -20,7 +20,7 @@ function parsePageTags(doc: CheerioStatic): OriginalTags {
         const q = cheerio.load(ele)
         const name = q('.tc').text()
         const values: string[] = []
-        q('.gt').each((i, n) => values.push(q(n).text()))
+        q('.gt').each((i, n) => values.push(q(n).text().replace(/\s+/g, '_')))
         tags[name.slice(0, name.length-1)] = values
     })
     return tags
