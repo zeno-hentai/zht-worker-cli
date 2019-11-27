@@ -194,6 +194,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/uuid@^3.4.6":
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.6.tgz#d2c4c48eb85a757bf2927f75f939942d521e3016"
+  integrity sha512-cCdlC/1kGEZdEglzOieLDYBxHsvEOIg7kp/2FYyVR9Pxakq+Qf/inL3RKQ+PA8gOlI/NnL+fXmQH12nwcGzsHw==
+  dependencies:
+    "@types/node" "*"
+
 "@types/ws@^6.0.3":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-6.0.3.tgz#b772375ba59d79066561c8d87500144d674ba6b3"
@@ -2285,7 +2292,7 @@ util-deprecate@^1.0.1:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-uuid@^3.3.2:
+uuid@^3.3.2, uuid@^3.3.3:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
@@ -2488,10 +2495,10 @@ yn@^3.0.0:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-zht-client-api@0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/zht-client-api/-/zht-client-api-0.0.21.tgz#efcc146eacdf76945e63d8c7d4a57faad1bd6f86"
-  integrity sha512-jPjdoVx0CG7iOp9CyQNNMJD/n8zz5Co9y++ZCD761BOcG4pl5P2L2MpXpuuJOFOylSiEVNt1mZEu+iQnPptVRg==
+zht-client-api@0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/zht-client-api/-/zht-client-api-0.0.22.tgz#0f17c75f320ec9ac6a92d6df2144227a5c2cbfb8"
+  integrity sha512-YnahpdDVP3gQekHhiqSx54HA3frKdW3U5czadRReB+GhqtOShuEbPw8+G80MrAkTzZEsuLlUw8DaEG0N8BQs6Q==
   dependencies:
     "@peculiar/webcrypto" "^1.0.21"
     "@types/axios" "^0.14.0"
@@ -2501,6 +2508,7 @@ zht-client-api@0.0.21:
     "@types/jszip" "^3.1.6"
     "@types/mocha" "^5.2.7"
     "@types/moment" "^2.13.0"
+    "@types/uuid" "^3.4.6"
     "@types/ws" "^6.0.3"
     axios "^0.19.0"
     base64-arraybuffer "^0.2.0"
@@ -2513,4 +2521,5 @@ zht-client-api@0.0.21:
     ts-node "^8.5.2"
     tsconfig-paths "^3.9.0"
     typescript "^3.7.2"
+    uuid "^3.3.3"
     ws "^7.2.0"
