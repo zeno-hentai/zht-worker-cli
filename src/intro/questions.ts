@@ -1,6 +1,6 @@
 import Inquirer = require('inquirer')
 import {BasicServerInfo} from '../data'
-import { BasicServerInfoMain } from '../data/config';
+import { BasicServerInfoMain, CheckPublicKeyInfo } from '../data/config';
 
 export async function questionServerInfo(): Promise<BasicServerInfo> {
     const answersMainPart = await Inquirer.prompt([

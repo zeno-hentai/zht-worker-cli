@@ -5,7 +5,7 @@ import { launchGuide } from './guide';
 import { ZHTWorkerClientAPI } from 'zht-client-api';
 import { getBaseUrl } from './utils';
 export async function introProject(): Promise<Omit<RuntimeConfig, 'keyPair'>> {
-    const configFile = Path.resolve(process.env["ZHT_WORKER_CONFIG"] || "./work-config.json")
+    const configFile = Path.resolve(process.env["ZHT_WORKER_CONFIG"] || "./worker-config.json")
     console.log(`Using config file: ${configFile}`)
     if(fs.existsSync(configFile)){
         const data = await fs.promises.readFile(configFile)

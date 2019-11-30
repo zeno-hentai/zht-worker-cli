@@ -8,6 +8,10 @@ export interface BasicServerInfoMain {
     useProxy: boolean
 }
 
+export interface CheckPublicKeyInfo {
+    matched: boolean
+}
+
 export type BasicServerInfo = Exclude<BasicServerInfoMain, 'useProxy'> & (
     {useProxy: true, proxyHost: string, proxyPort: number} |
     {useProxy: false}

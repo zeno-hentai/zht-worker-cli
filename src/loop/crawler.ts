@@ -38,6 +38,9 @@ export async function executeCrawler(
             return await crawler.download(url, proxy, client)
         }catch(err) {
             console.error(err)
+            if(err instanceof Error){
+                console.error(err.stack)
+            }
             return false
         }
 }

@@ -59,11 +59,12 @@ describe('e-hentai crawler test', () => {
             expect(items.length).eq(1)
             const item = items[0]
             expect(item.meta.title).eq('[Shiheki] Tokushu Seiheki o Oshitsuke te kuru Villain to ippanzin no manga  丨 強迫轉換特殊性癖的敵人和普通人 [Chinese] [沒有漢化]')
-            expect(item.meta.language).eq('zh-CN')
+            expect(item.meta.language).eq('zh')
             expect(item.tags.some( ({tag}) => tag == 'artist:shiheki')).true
             expect(item.meta.pageNumber).eq(7)
             const fileMap = await testConf.client.getFileMap(item.id, item.key)
-            expect(Object.keys(fileMap).length).eq(7)
+            const names = Object.keys(fileMap)
+            expect(names.length).eq(7)
         }
     }).timeout(100000)
 })

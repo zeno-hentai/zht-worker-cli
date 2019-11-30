@@ -47,6 +47,7 @@ export class ZHTCrawlerManager {
     async close(){
         if(this.listener){
             this.listener.close()
+            console.log("Websocket closed.")
         }
         await this.flow
     }

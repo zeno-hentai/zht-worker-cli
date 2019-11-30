@@ -20,12 +20,14 @@
     "@types/cheerio": "^0.22.14",
     "@types/inquirer": "^6.5.0",
     "@types/mocha": "^5.2.7",
+    "@types/sharp": "^0.23.0",
     "chai": "^4.2.0",
     "cheerio": "^1.0.0-rc.3",
     "inquirer": "^7.0.0",
     "mocha": "^6.2.2",
+    "sharp": "^0.23.3",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2",
-    "zht-client-api": "0.0.23"
+    "zht-client-api": "0.0.25"
   }
 }

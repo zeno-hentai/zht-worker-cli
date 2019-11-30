@@ -3,13 +3,15 @@ import { GalleryMeta } from 'zht-client-api';
 import cheerio from 'cheerio'
 import axios from 'axios';
 import { ZHTLanguage } from 'zht-client-api';
+import sharp from 'sharp'
+import fs from 'fs';
 
 async function initialize(proxy: CrawlerProxyConfig | null): Promise<void>{
 
 }
 
 async function test(url: string): Promise<boolean> {
-    return !!url.match(/http?s:\/\/e-hentai\.org\/g\/\d+\/[A-Za-z]+\d+\//)
+    return !!url.match(/http?s:\/\/e-hentai\.org\/g\/\w+\/\w+\/?/)
 }
 
 type OriginalTags = {[key: string]: string[]}
@@ -27,7 +29,7 @@ function parsePageTags(doc: CheerioStatic): OriginalTags {
 }
 
 const LanguageMap: {[key: string]: ZHTLanguage} = {
-    chinese: 'zh-CN',
+    chinese: 'zh',
     japanese: 'jp',
     english: 'en-US'
 }
@@ -45,7 +47,7 @@ function getLanguage(tags: OriginalTags): ZHTLanguage {
     }
 }
 
-function parseMetaPage(doc: CheerioStatic): [Omit<GalleryMeta, 'pageNumber' | 'files'>, string[], string] {
+function parseMetaPage(doc: CheerioStatic, url: string): [Omit<GalleryMeta, 'pageNumber' | 'files'>, string[], string] {
     const title = doc("#gn").text()
     const jpTitle = doc("#gj").text()
     const description = ""
@@ -61,6 +63,10 @@ function parseMetaPage(doc: CheerioStatic): [Omit<GalleryMeta, 'pageNumber' | 'f
     return [
         {
             type: "gallery",
+            source: {
+                type: 'crawler',
+                url
+            },
             title,
             subTitles: {
                 'jp': jpTitle
@@ -82,20 +88,28 @@ function parseImagePage(doc: CheerioStatic): [string, string | null] {
 
 async function download(url: string, proxy: CrawlerProxyConfig | null, client: CrawlerMetaClient<GalleryMeta>): Promise<boolean> {
     const agent = axios.create({
-        proxy: proxy || undefined
+        proxy: proxy || undefined,
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
+        }
     });
     const doc = cheerio.load((await agent.get(url)).data)
-    const [meta, tags, firstUrl] = parseMetaPage(doc)
+    const [meta, tags, firstUrl] = parseMetaPage(doc, url)
     const images: [string, ArrayBuffer][] = []
     let pageUrl: string | null = firstUrl
     console.log(meta)
+    const enc = new TextEncoder()
     while(pageUrl != null){
         const imgDoc = cheerio.load((await agent.get(pageUrl)).data)
         const [imgUrl, nextPage] = parseImagePage(imgDoc)
-        const ext = (imgUrl.match(/\.(\w+)$/) || ['jpg'])[1]
-        console.log(`Image from: ${pageUrl}`)
-        const {data} = (await agent.get(imgUrl))
-        images.push([ext, data])
+        const ext = 'png'
+        console.log(`Image from: ${pageUrl}  \n from ${imgUrl}`)
+        const {data} = (await agent.get(imgUrl, {
+            responseType: 'arraybuffer'
+        }))
+        const buf = Buffer.from(data)
+        const imageData = await sharp(buf).png().toBuffer()
+        images.push([ext, imageData])
         pageUrl = nextPage == pageUrl ? null : nextPage
     }
     const files: {[key: string]: string} = {}

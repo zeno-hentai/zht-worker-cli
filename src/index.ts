@@ -11,7 +11,6 @@ async function main(){
         ...serverInfo,
         keyPair
     }
-    console.log(serverInfo)
     await new Promise((resolve, reject) => {
         initializeLoop(runtimeConfig, resolve)
     })
