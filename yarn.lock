@@ -140,11 +140,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/crypto-js@^3.1.43":
-  version "3.1.43"
-  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-3.1.43.tgz#b859347d6289ba13e347c335a4c9efa63337a748"
-  integrity sha512-EHe/YKctU3IYNBsDmSOPX/7jLHPRlx8WaiDKSY9JCTnJ8XJeM4c0ZJvx+9Gxmr2s2ihI92R+3U/gNL1sq5oRuQ==
-
 "@types/inquirer@^6.5.0":
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-6.5.0.tgz#b83b0bf30b88b8be7246d40e51d32fe9d10e09be"
@@ -624,11 +619,6 @@ cross-spawn@^4:
   dependencies:
     lru-cache "^4.0.1"
     which "^1.2.9"
-
-crypto-js@^3.1.9-1:
-  version "3.1.9-1"
-  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
-  integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
 
 css-select@~1.2.0:
   version "1.2.0"
@@ -2876,16 +2866,15 @@ yn@^3.0.0:
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 
-zht-client-api@0.0.25:
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/zht-client-api/-/zht-client-api-0.0.25.tgz#35df8937e3e63e5aef9c3e4df774efc1dd5389a8"
-  integrity sha512-8RwU2aNCpNR5bSDge/KiVN+MrUeC0fa4fDbnsQ/OE9Jc5kHf00OCQlwiKI6QM8BKxl1Bl8SZCt6sko45/Z2HUw==
+zht-client-api@0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/zht-client-api/-/zht-client-api-0.0.26.tgz#9fba7e36f21598e85c4fe7c439c7b41e257bb90d"
+  integrity sha512-O4dpga9kgB5J7jbwtqdYuFjvCVh6iN6HxhFvRozqk+GOw6Ts8+WKVfcM4nPktVNRCmt84UR7D4bOyyQGslPwAQ==
   dependencies:
     "@peculiar/webcrypto" "^1.0.21"
     "@types/axios" "^0.14.0"
     "@types/base64-arraybuffer" "^0.1.0"
     "@types/chai" "^4.2.5"
-    "@types/crypto-js" "^3.1.43"
     "@types/jszip" "^3.1.6"
     "@types/mocha" "^5.2.7"
     "@types/moment" "^2.13.0"
@@ -2895,7 +2884,6 @@ zht-client-api@0.0.25:
     base64-arraybuffer "^0.2.0"
     browser-env "^3.3.0"
     chai "^4.2.0"
-    crypto-js "^3.1.9-1"
     mocha "^6.2.2"
     moment "^2.24.0"
     nyc "^14.1.1"
