@@ -22,7 +22,7 @@ function parsePageTags(doc: CheerioStatic): OriginalTags {
         const q = cheerio.load(ele)
         const name = q('.tc').text()
         const values: string[] = []
-        q('.gt').each((i, n) => values.push(q(n).text().replace(/\s+/g, '_')))
+        q('.gt, .gtl').each((i, n) => values.push(q(n).text().replace(/\s+/g, '_')))
         tags[name.slice(0, name.length-1)] = values
     })
     return tags
@@ -72,7 +72,8 @@ function parseMetaPage(doc: CheerioStatic, url: string): [Omit<GalleryMeta, 'pag
                 'jp': jpTitle
             },
             description,
-            language
+            language,
+            preview: 'preview.png'
         },
         tags,
         firstUrl
@@ -116,12 +117,14 @@ async function download(url: string, proxy: CrawlerProxyConfig | null, client: C
     images.forEach(([ext, _], idx) => {
         files[idx] = `${idx}.${ext}`
     })
+    const previewData = await sharp(Buffer.from(images[0][1])).resize(null, 500).png().toBuffer()
     const {uploadFile} = await client.uploadMeta({
         ...meta,
         pageNumber: images.length,
         files
     }, tags)
     let index = 0
+    await uploadFile('preview.png', previewData)
     for(let [ext, imageData] of images) {
         const name = `${index++}.${ext}`
         await uploadFile(name, imageData)
